@@ -2,10 +2,12 @@ import { Module } from '@nestjs/common';
 import { MenuModule } from './menu/menu.module';
 import { OrderModule } from './order/order.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://cordeirolucas42:4m0pVY5uBBSpkfw8@gearsets.4mscdf7.mongodb.net/', { dbName: "rabbit-delivery" }),
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(process.env.DB_URL, { dbName: "rabbit-delivery" }),
     MenuModule,
     OrderModule
   ]
