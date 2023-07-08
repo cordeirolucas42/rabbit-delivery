@@ -2,6 +2,7 @@ import { Body, Controller, Get, Headers, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { OrderService } from './order.service';
 import { CreateOrderDTO, OrderDTO } from './model/order.dto';
+import { Order } from './model/order.schema';
 
 @Controller('order')
 @ApiTags('Order')
@@ -12,7 +13,7 @@ export class OrderController {
 
   @Get(':id')
   async getOrderById(
-    @Param('orderId') orderId: number
+    @Param('id') orderId: string
   ): Promise<OrderDTO> {
     return this.orderService.getOrderById(orderId)
   }
@@ -20,7 +21,7 @@ export class OrderController {
   @Post()
   async placeOrder(
     @Body() createOrderDTO: CreateOrderDTO
-  ): Promise<void> {
+  ): Promise<Order> {
     return this.orderService.placeOrder(createOrderDTO)
   }
 }
