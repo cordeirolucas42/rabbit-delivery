@@ -1,5 +1,5 @@
 import { Controller, Get, Headers } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MenuService } from './menu.service';
 import { MenuDTO } from './model/menu.dto';
 
@@ -11,6 +11,7 @@ export class MenuController {
   ) {}
 
   @Get()
+  @ApiResponse({ type: MenuDTO })
   async getMenu(): Promise<MenuDTO> {
     return this.menuService.getMenu()
   }
